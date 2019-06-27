@@ -1,0 +1,8 @@
+#!/bin/bash
+#doophin
+IFS=$'\n'
+for zjm in `cat ~/shell/listshengji|awk -F' ' '!/[#]/{print $1 $2}'`
+do
+zj=`echo $zjm|tr -d "0-9"`
+ssh $zjm "export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$zjm/bin;$zjm/bin/$zj -v;md5sum $zjm/bin/$zj|awk -F' ' '{print \$1}';echo"
+done
